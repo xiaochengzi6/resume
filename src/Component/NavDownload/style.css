@@ -1,0 +1,19 @@
+.Navdownload {
+    height: 30px;
+    margin: 0 auto;
+    padding: 0 40px;
+    background-color: #f7f1e3;
+    box-shadow: 0 3px 20px #808e9b;
+    position: relative;
+    top:1px;
+    z-index:2;
+}
+.Nav--ul {
+    float: right;
+}
+.Nav--ul li {
+    float: left;
+    line-height: 30px;
+    font-size: 14px;
+    padding-left: 60px;
+}

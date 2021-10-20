@@ -1,0 +1,131 @@
+/*----------->left<->right<--------------*/
+.lr-container{
+    display:flex;
+}
+.lr-container .left {
+    flex: auto;
+    text-align: left;
+  }
+
+  .lr-container .right {
+    flex: auto;
+    text-align: right;
+  }
+/*-----------H--------------*/
+.leftView--div h1 {
+    padding: 10px 0;
+    font-size: 28px;
+    border-bottom: 1px solid rgba(34, 30, 30, 0.699);
+    font-weight: 900;
+    margin-left: 50px;
+}
+.leftView--div h2 {
+    font-size: 16px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    width: 180px;
+    background-color: rgb(238, 238, 238);
+    text-align: center !important;
+    padding: 0px;
+    margin: 0px auto;
+    margin-bottom: 6px !important;
+    border-radius: 32px;
+    
+}
+.leftView--div h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 50px;
+    padding:2.5px 0;
+}
+/*-----------(before)-H-(after)--------------*/
+.leftView--div h2::before {
+    content: "";
+    width: calc(237px);
+    position: absolute;
+    top: 50%;
+    height: 0px;
+    right: calc(100% + 20px);
+    border-top: 1px solid rgb(237, 237, 237);
+}
+.leftView--div h2::after {
+    content: "";
+    width: calc(237px);
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 20px);
+    right: 0px;
+    border-top: 1px solid rgb(237, 237, 237);
+}
+
+
+/*-----------ul--------------*/
+.leftView--div ul{
+    overflow: hidden;
+    margin-left: 50px;
+}
+/*层级1*/
+.leftView--div ul li{
+    list-style: square inside;
+    margin-top: 8px;/**/
+    
+}
+/*层级2*/
+.leftView--div li ul li{
+    /* list-style: square inside; */
+    list-style-type: circle;
+    margin: 0 13px;
+}
+.leftView--div li ul{
+    margin-left: 0;
+}
+
+/* .leftView--div ul li ul li::marker {
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0px !important;
+    text-align: start !important;
+    text-align-last: start !important;
+} */
+
+/*-----------a--------------*/
+.leftView--div a {
+    color: #d4d4d4;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+    -webkit-text-decoration-skip: objects;
+  }
+/*-----------img--------------*/
+.leftView--div img {
+    max-width: 400px;
+  }
+
+/*-----------code--------------*/
+.leftView--div code {
+    padding: 3px 6px;
+    display: inline-block;
+    color: #333;
+    border-radius: 4px;
+    margin: 0 2px 0px;
+    background-color: rgba(27,31,35,.05);
+    word-break: break-all;
+    font-size: 13px;
+  }
+  /*-----------p--------------*/
+.leftView--div p {
+    margin-bottom: 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 14px;
+    line-height: 2;
+  }
+.h2_block{
+    padding-top: 20px;
+    /* padding-bottom: 20px; */
+}
