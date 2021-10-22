@@ -3,17 +3,20 @@
     margin: 0 auto;
     padding: 0 40px;
     background-color: #f7f1e3;
-    box-shadow: 0 3px 20px #808e9b;
+    box-shadow: 0 2px 15px #808e9b;
     position: relative;
-    top:1px;
-    z-index:2;
+    /* top:1px; */
+    z-index:10;
 }
-.Nav--ul {
+
+.nav-right--ul-css li {
     float: right;
-}
-.Nav--ul li {
-    float: left;
     line-height: 30px;
     font-size: 14px;
-    padding-left: 60px;
+    margin-left: 40px;
+}
+/*消除 and.css 带来的影响*/
+ol, ul, dl {
+    margin-top: 0;
+    margin-bottom: 0;
 }

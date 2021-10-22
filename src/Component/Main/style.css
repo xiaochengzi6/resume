@@ -1,9 +1,9 @@
 .Main--div {
     display: flex;
-    width: 100%;
+    width: calc(100% - 10px);
     /* min-width: 1000px; */
-    height: calc(100% - 100px);/*计算整体页面大小然后减去多余部分剩下的就是视图区域*/
+    height: calc(100% - 114px);/*计算整体页面大小然后减去多余部分剩下的就是视图区域*/
     position: absolute;
-    overflow-x:scroll;
-    
+    /* overflow-x:scroll; */
+    /* box-sizing: border-box; */
 }

@@ -12,11 +12,8 @@ export default class Main extends Component {
         return (
             <div className='Main--div'>
                 <SplitPane split="vertical" minSize={500} primary='second' >
-                    <LeftView
-                    />
-                    <RightWrith
-                    >
-                    </RightWrith>
+                    <LeftView />
+                    <RightWrith />
                 </SplitPane>
             </div>
         )

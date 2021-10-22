@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './stale.css'
 import CodeMirror from "@uiw/react-codemirror";
 import { debounce } from 'lodash';
-import { writhMd, tansfromMH } from '../../redux/actionFunction'
+import { writhMd, tansfromMH, ChangeRightScrollHeight } from '../../redux/actionFunction'
 import { connect } from 'react-redux'
 import basedata from '../base/const'
 import { markdownParserResume } from '../../markdownRules/Rules.js'
@@ -12,7 +12,7 @@ import { markdownParserResume } from '../../markdownRules/Rules.js'
  * @param {*} { data, changeMD, changeHTML }
  * @return {*} 
  */
-let RightWrith = ({ data, changeMD, changeHTML }) => {
+let RightWrith = ({ data, changeMD, changeHTML, changeScrollHeight }) => {
 
     /*初始data*/
     if (!data) {
@@ -34,10 +34,18 @@ let RightWrith = ({ data, changeMD, changeHTML }) => {
                     lineNumbers: false,/*显示行数*/
                     extraKeys: {},
                 }}
-
-                onChange={debounce((editor) => {
-                    changeMD(editor.getValue())/*创建函数 改变就会调用*/
-                }, 300)}
+                onChange={
+                    debounce((editor) => {
+                        changeMD(editor.getValue())/*创建函数 改变就会调用*/
+                    }, 300)}
+                onScroll={
+                    (e) => {
+                        let top= Math.round(e.getScrollInfo().top)
+                        let height= Math.round(e.getScrollInfo().height)
+                        changeScrollHeight(top,height)
+                        console.log('onC',e.getScrollInfo())
+                    }
+                }
             >
             </CodeMirror>
         </div>
@@ -57,6 +65,9 @@ const mapDispatchProps = (dispatch, ownProps) => {
         },
         changeHTML: (htmls) => {
             dispatch(tansfromMH(htmls))
+        },
+        changeScrollHeight: (top, height) => {
+            dispatch(ChangeRightScrollHeight(top, height))
         }
     }
 }

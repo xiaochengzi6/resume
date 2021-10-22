@@ -24,3 +24,11 @@ export  function tansfromMH(htmls) {
         html: htmls
     }
 }
+//保存 右侧高度
+export function ChangeRightScrollHeight(top,height){
+    return {
+        type: 'CHANGE--RIGHT-SCROLLHEIGHT',
+        top,
+        height
+    }
+}

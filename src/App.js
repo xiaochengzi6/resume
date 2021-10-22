@@ -2,6 +2,7 @@ import './index.css'
 import './base.css'
 import './Component/pageCss/default.css'
 import './Component/uils/codemirror-github-light-theme.css'
+// import 'antd/dist/antd.css';
 import React, { Component } from 'react'
 import Main from './Component/Main/Main.js'
 import HeaderCommander from './Component/HeaderCommander/index'

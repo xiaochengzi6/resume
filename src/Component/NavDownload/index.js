@@ -3,21 +3,21 @@ import './style.css'
 import printPDF from '../htmlpdf/index.js'
 import {isDownPdf} from '../../redux/actionFunction'
 import {connect} from 'react-redux'
+import {FolderOutlined, SyncOutlined,FilePdfOutlined,UploadOutlined} from '@ant-design/icons'
 let NavDownload = ({markd, isboo, height}) => {
 
     const handleClick = () => {
         isboo()
-        console.log('下载：',height)
         printPDF(height) 
     }
     return (
         <div className="Navdownload">
-            <ul className="Nav--ul">
-                { markd ?  <li onClick={handleClick}><a href="javascript:">导出PDF</a></li>:<li>导出PDF</li>}
+            <ul className="nav-right--ul-css">
+                { markd ?  <li onClick={handleClick}><a href="javascript:">{<FilePdfOutlined />} 导出PDF</a></li>:<li> {<SyncOutlined spin />}导出PDF</li>}
                 <li>历史记录</li>
-                <li>上传</li>
+                <li>{<UploadOutlined />} 上传</li>
                 <li>选择主题</li>
-                <li>文件</li>
+                <li>{<FolderOutlined />} 文件</li>
             </ul>
         </div>
     )
