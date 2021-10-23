@@ -32,3 +32,18 @@ export function ChangeRightScrollHeight(top,height){
         height
     }
 }
+//View大盒子 的ref
+export function GetLeftRef(ref){
+    return {
+        type: 'GET-LEFT-REF',
+        ref
+    }
+}
+
+//nn 小盒子 ref
+export function RefMouseover(ref){
+    return {
+        type: 'GETEFMOUSEOVER',
+        ref
+    }
+}

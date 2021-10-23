@@ -1,0 +1,5 @@
+.cover-div {
+    border: 1px dashed rgb(218, 63, 202);
+    position: absolute;
+    pointer-events: none;
+}

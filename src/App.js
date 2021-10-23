@@ -9,6 +9,7 @@ import HeaderCommander from './Component/HeaderCommander/index'
 import NavDownload from './Component/NavDownload/index'
 import data from './Component/base/const'
 import LeftView from './Component/LeftView/index'
+import ViewDiv from './Component/isView/index'
 export default class App extends Component {
   
     /*致命问题 :父组件向子组件传递 state 后者是不能去改变的 但不传递数据又会造成数据不共享，每个组件都无法共享数据
@@ -26,6 +27,7 @@ export default class App extends Component {
           <HeaderCommander />
           <NavDownload />
           <Main />
+          <ViewDiv />
         </div>  
       )
     }

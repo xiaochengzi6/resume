@@ -1,5 +1,6 @@
 import state_base from './state'
 export default function Reducer(state = state_base, action) {
+    console.log(action)
     switch (action.type) {
         case 'ISDOWN--PDF':
             return {
@@ -31,6 +32,16 @@ export default function Reducer(state = state_base, action) {
                     top: action.top,
                     height: action.height
                 }
+            }
+        case 'GET-LEFT-REF':
+            return {
+                ...state,
+                leftViewRef: action.ref
+            }
+        case 'GETEFMOUSEOVER':
+            return {
+                ...state,
+                refMouseover: action.ref
             }
         default:
             return state
