@@ -1,9 +1,15 @@
+/*是否导出pdf*/
 export  function isDownPdf() {
     return {
         type: 'ISDOWN--PDF',
     }
 }
-
+/*是否可视化*/
+export function isMoveViewFunc() {
+    return {
+        type: 'ISMOVEVIEWFUNC'
+    }
+}
 export  function getheight(height) {
     return {
         type: 'LEFTDIV--HEIGHT',
@@ -45,5 +51,24 @@ export function RefMouseover(ref){
     return {
         type: 'GETEFMOUSEOVER',
         ref
+    }
+}
+
+export function GetTextValue(text){
+    return {
+        type: 'GETTEXTVALUE',
+        text
+    }
+}
+export function GetTextArray(value){
+    return {
+        type: 'GETTEXTARRAY',
+        value
+    }
+}
+export function GetCodeMirrorLine(line){
+    return {
+        type: 'GETCODEMIRRORLINE',
+        line
     }
 }

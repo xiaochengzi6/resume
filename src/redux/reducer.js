@@ -8,6 +8,11 @@ export default function Reducer(state = state_base, action) {
                 isDownPDF: !state.isDownPDF,
 
             }
+        case 'ISMOVEVIEWFUNC':
+            return {
+                ...state,
+                isMoveView: !state.isMoveView,
+            }
         case 'LEFTDIV--HEIGHT':
             return {
                 ...state,
@@ -42,6 +47,27 @@ export default function Reducer(state = state_base, action) {
             return {
                 ...state,
                 refMouseover: action.ref
+            }
+        case 'GETTEXTVALUE':
+            return {
+                ...state,
+                GetMoveValueToLine: {
+                    textValue: action.text
+                }
+            }
+        case "GETTEXTARRAY":
+            return {
+                ...state,
+                GetMoveValueToLine: {
+                    textArray: action.value,
+                }
+            }
+        case "GETCODEMIRRORLINE":
+            return {
+                ...state,
+                GetMoveValueToLine: {
+                    codeLine: action.line
+                }
             }
         default:
             return state

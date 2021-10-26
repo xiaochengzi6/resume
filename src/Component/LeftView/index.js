@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import './style.css'
-import LeftViewButton from '../SynScroll/index'
+import LeftButton from '../LeftViewButton/index'
 import { connect } from 'react-redux'
 import { getheight, GetLeftRef, RefMouseover } from '../../redux/actionFunction'
 
@@ -19,7 +19,7 @@ const LeftView = ({ writh, changeHeight, refProps, getRefView }) => {
 
     return (
         <>
-            <LeftViewButton />
+            <LeftButton />
             <div className="leftView" ref={divScroll}>
                 <div className="leftView--div">
                     <div dangerouslySetInnerHTML={{ __html: writh }} className="nn" ref={htmls} />
