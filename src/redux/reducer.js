@@ -1,6 +1,5 @@
 import state_base from './state'
 export default function Reducer(state = state_base, action) {
-    console.log(action)
     switch (action.type) {
         case 'ISDOWN--PDF':
             return {
@@ -65,9 +64,7 @@ export default function Reducer(state = state_base, action) {
         case "GETCODEMIRRORLINE":
             return {
                 ...state,
-                GetMoveValueToLine: {
-                    codeLine: action.line
-                }
+                SetcodeLine: action.line
             }
         default:
             return state

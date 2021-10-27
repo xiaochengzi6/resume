@@ -16,7 +16,7 @@ let tss = /-*/
  * @param {*} { data, changeMD, changeHTML }
  * @return {*} 
  */
-let RightWrith = ({ data, changeMD, changeHTML, changeScrollHeight, GetArrayText }) => {
+let RightWrith = ({ data, changeMD, changeHTML, changeScrollHeight, GetArrayText, getline, isViewMove }) => {
     const codeRef = useRef(null)
     /*初始data*/
     if (!data) {
@@ -29,14 +29,14 @@ let RightWrith = ({ data, changeMD, changeHTML, changeScrollHeight, GetArrayText
     })
     /*获取dom节点*/
     useEffect(() => {
-       let text = []
+        let text = []
         setTimeout(() => {
             let docs = codeRef.current.editor.doc
             for (let i = 0; i < docs.children.length; i++) {
                 /*0-3*/
                 for (let j = 0; j < docs.children[i].lines.length; j++) {
                     /*0-25*/
-                    text.push(docs.children[i].lines[j].text.replace(pattern,'').trim().replace(tss,'').trim())
+                    text.push(docs.children[i].lines[j].text.replace(pattern, '').trim().replace(tss, '').trim())
                 }
             }
             GetArrayText(text)/*保存textArray 如果组件更新需要重新保存*/
@@ -53,20 +53,36 @@ let RightWrith = ({ data, changeMD, changeHTML, changeScrollHeight, GetArrayText
                     lineWrapping: true,
                     extraKeys: {},
                 }}
-                
+
                 onChange={
                     debounce((editor) => {
                         changeMD(editor.getValue())/*创建函数 改变就会调用*/
                     }, 300)}
+                // onFocus={
+                //     (editor) => {
+                //         if (isViewMove) {
+                //             console.log('getline:', getline)
+                //             editor.addLineClass(getline, 'background', 'background-codemirror-div')
+                //             setTimeout(() => {
+                //                 editor.removeLineClass(getline, 'background', 'background-codemirror-div')
+                //             }, 1000)
+                //         }
+                //     }
 
+                // }
+                // onBlur={
+                //     (editor)=>{
+                //         editor.removeLineClass(getline,'background','background-codemirror-div')
+                //     }
+                // }
                 onScroll={
                     (e) => {
-                        // console.log('1', e.lineInfo(17))
-                        // console.log('doc1', e.getDoc().children[0].lines[1]['text'])
-                        // console.log('doc2', e.getDoc().children[1])
                         let top = Math.round(e.getScrollInfo().top)
                         let height = Math.round(e.getScrollInfo().height)
                         changeScrollHeight(top, height)
+                        while (isViewMove) {
+
+                        }
                     }
                 }
             >
@@ -78,7 +94,9 @@ let RightWrith = ({ data, changeMD, changeHTML, changeScrollHeight, GetArrayText
 const mapStateProps = (state, ownProps) => {
     //ownProps 是容器组件接收的参数这里不需要
     return {
-        data: state.rightWrith_markd
+        data: state.rightWrith_markd,
+        getline: state.SetcodeLine,
+        // isViewMove: state.isMoveView,
     }
 }
 const mapDispatchProps = (dispatch, ownProps) => {

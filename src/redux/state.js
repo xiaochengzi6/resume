@@ -16,5 +16,6 @@ const state_base =
         textArray: [],
         codeLine: -1
     },/*获取 1.可视化视图区域的 textValue 2.codeMirror的textArray 3.生成codeLine */
+    SetcodeLine: ''
 }
 export default state_base
