@@ -16,3 +16,10 @@
   float:left
 }
 
+.m-bady {
+  background-color: #fff;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  border-top: 2px #4395ff solid;
+}
+
