@@ -9,7 +9,9 @@ const LeftButton =() => {
     return (
         <div className="leftView-top-button">
             <div className="leftView-bu-center">
+                {/* 同步滚动 */}
                 <SynScroll />
+                {/* 可视化 */}
                 <ViewMoveCode />
                 <div className="leftView-bu-div" key='3'><span>未知</span><Switch size="small" /> </div>
                 <div className="leftView-bu-div" key='4'><span>一页纸</span><Switch size="small" /> </div>

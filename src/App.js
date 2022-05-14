@@ -22,12 +22,14 @@ const App = () => {
       <BrowserRouter>
 
         <Switch>
+          {/* 主页 */}
           <Route exact path="/">
             <HeaderCommander />
             <NavDownload />
             <Main />
             <ViewDiv />
           </Route>
+          {/* 使用教程 */}
           <Route path="/useCourse" >
             <HeaderCommander />
             <div className="m-bady">

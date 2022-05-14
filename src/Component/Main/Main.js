@@ -12,7 +12,9 @@ export default class Main extends Component {
         return (
             <div className='Main--div'>
                 <SplitPane split="vertical" minSize={500} primary='second' >
+                    {/* 展示页面 */}
                     <LeftView />
+                    {/* 编辑页面 */}
                     <RightWrith />
                 </SplitPane>
             </div>
