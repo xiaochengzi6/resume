@@ -1,0 +1,34 @@
+/* 导航栏逻辑 */
+.Navdownload {
+  height: 30px;
+  /* margin: 0 auto; */
+  /* margin: 70px 0 0 0; */
+  padding: 0 40px;
+  background-color: #f7f1e3;
+  box-shadow: 0 2px 15px #808e9b;
+  /* position: relative; */
+  /* top:1px; */
+  /* z-index:1; */
+}
+
+.nav-right--ul-css li {
+  float: right;
+  line-height: 30px;
+  font-size: 14px;
+  margin-left: 40px;
+}
+/*消除 and.css 带来的影响*/
+ol, ul, dl {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* 主题逻辑 */
+.Main--div {
+    
+  width: calc(100% - 10px);
+  /* min-width: 1000px; */
+  height: calc(100% - 114px);/*计算整体页面大小然后减去多余部分剩下的就是视图区域*/
+  display: flex;
+  position: absolute;
+}

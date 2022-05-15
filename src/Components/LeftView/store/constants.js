@@ -1,0 +1,2 @@
+export const CHANGEHEIGHT = '/LeftView/CHANGE_HEIGHT';
+export const CHANGEWEITHMARED = '/LeftView/CHANGE_WEITE_MARED';

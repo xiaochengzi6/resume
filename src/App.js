@@ -1,47 +1,18 @@
 import 'antd/dist/antd.css'
-import './index.css'
-import './base.css'
-import './Component/pageCss/default.css'
-import './Component/uils/codemirror-github-light-theme.css'
-import './Component/HeaderCommander/style.css'
-import './App.css'
+import './baseUI/base.css'
+import './baseUI/App.css'
 
-import React, { Component } from 'react'
-import Main from './Component/Main/Main'
-import HeaderCommander from './Component/HeaderCommander/index'
-import NavDownload from './Component/NavDownload/index'
-import WriteText from './Component/WriteText/index'
-import ViewDiv from './Component/isView/index'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter } from "react-router-dom";
+import {renderRoutes} from 'react-router-config';
+import routes from './routes/index.js'
+
 const App = () => {
-
-
-
   return (
     <div>
-      <BrowserRouter>
-
-        <Switch>
-          {/* 主页 */}
-          <Route exact path="/">
-            <HeaderCommander />
-            <NavDownload />
-            <Main />
-            <ViewDiv />
-          </Route>
-          {/* 使用教程 */}
-          <Route path="/useCourse" >
-            <HeaderCommander />
-            <div className="m-bady">
-              <WriteText />
-            </div>
-          </Route>
-        </Switch>
-
-      </BrowserRouter>
-
+      <HashRouter>
+      {renderRoutes(routes)}
+      </HashRouter>
     </div>
   )
-
 }
 export default App

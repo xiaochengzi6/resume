@@ -1,0 +1,32 @@
+/* 这里就搭建了一个简单的显示页面 */
+.leftView {
+    background-color: #606060;
+    overflow-y: scroll;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .leftView--div {
+    background-color: #fff;
+    width: 794px;
+    margin: 50px auto;
+    color: black;
+    padding-bottom: 10px;
+  }
+
+
+
+/* 可视化组件 */
+.cover-div {
+    border: 1px dashed rgb(218, 63, 202);
+    position: absolute;
+    pointer-events: none;
+    font-size: 14px;
+    color: #111;
+}
+.cover-div span {
+    display: block;
+    position: relative;
+    right: 33px;
+    top: 2px;
+}

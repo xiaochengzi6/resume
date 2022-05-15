@@ -1,0 +1,9 @@
+.m-bady {
+  background-color: #fff;
+  width: 100vw;
+  height: calc(100vh - 100px);
+  border-top: 2px #4395ff solid;
+  /* float: left; */
+  overflow-y: scroll;
+  position:relative
+}
