@@ -5,19 +5,27 @@ import LeftButton from "../LeftViewButton/index.js";
 import { connect } from "react-redux";
 import { change_height } from "./store/actionCreate";
 import { markdownParserResume } from "../../utils/markdownRules/Rules.js";
-
+// const coverDiv
 let LeftView = (props) => {
   // 这里要对 writh 做一个处理
-  let { changeHeight, writh, isSyncScroll, isViewModeCode, right_Client, TextArrays } =
-    props;
+  let {
+    changeHeight,
+    writh,
+    isSyncScroll,
+    isViewModeCode,
+    right_Client,
+    TextArrays,
+    RightCodeDivRef,
+  } = props;
   const divScroll = useRef(null);
   const htmls = useRef(null);
-  let [line, setLine] = useState('')
-  // ---------------修改
+  let [line, setLine] = useState("");
+
   let mdToHtml = markdownParserResume.render(writh);
-  // ---------------结束
+
   useEffect(() => {
     const client = document.querySelector(".leftView--div").clientHeight;
+    console.log(client);
     changeHeight(Number(client));
   }, [writh]);
 
@@ -28,25 +36,43 @@ let LeftView = (props) => {
       const { top, height } = right_Client;
       let viewBoxHeight =
         divScroll.current.children[0].getBoundingClientRect().height;
-      console.log("viewBoxHeight", viewBoxHeight);
-      divScroll.current.scrollTop = Math.round(
-        top * ((viewBoxHeight + 150) / height)
-      );
+      const RightWrithDIV = document.querySelector(".CodeMirror-scroll");
+
+
+       // todo 左边动 右随动
+      let currentTop;
+      const onScrollView = () => {
+        // 每次滚动的 大小
+        currentTop = Math.round(divScroll.current.scrollTop);
+        RightWrithDIV.scrollTop = Math.round(
+          currentTop * ((height + 100) / viewBoxHeight)
+        );
+      };
+      divScroll.current.addEventListener("scroll", onScrollView);
+
+      // todo 右边动 左随动
+      // divScroll.current.scrollTop = Math.round(
+      //   top * ((viewBoxHeight + 150) / height)
+      // );
+      return () => {
+        divScroll.current.removeEventListener("scroll", onScrollView);
+      };
     }
-  }, [isSyncScroll, right_Client]);
+  }, [isSyncScroll]);
 
   // 可视化
   useEffect(() => {
+    const coverDiv = document.querySelector(".cover-div");
+    // 获取右边编辑页面
+    // const CodeMirror_code_ChildNode = document.querySelector(".CodeMirror-code");
     if (isViewModeCode) {
       htmls.current.addEventListener("mouseover", bindMouseover);
       htmls.current.addEventListener("mouseleave", mouseLeave);
-    } else {
-      htmls.current.removeEventListener("mouseover", bindMouseover);
-      htmls.current.removeEventListener("mouseleave", mouseLeave);
     }
 
+    divScroll.current.addEventListener("scroll", mouseLeave);
+    let displayDiv;
     function mouseLeave() {
-      const coverDiv = document.querySelector(".cover-div");
       if (coverDiv) {
         coverDiv.style.border = 0;
         coverDiv.style.color = "#fff";
@@ -56,15 +82,26 @@ let LeftView = (props) => {
       let length = e.target.children.length;
       if (length === 0 && isViewModeCode) {
         const coverDiv = document.querySelector(".cover-div");
+
         if (coverDiv) {
-          let valueText = e.srcElement.innerText; /*找到其value然后和编辑器对比*/
+          /*找到其value然后和编辑器对比*/
+          let valueText = e.srcElement.innerText;
           let number = TextArrays.indexOf(valueText, 0);
           if (number === -1) {
             setLine("");
           } else {
             setLine(number + 1);
+            // 这里显示不出来 有问题
+            // displayDiv = CodeMirror_code_ChildNode.childNodes[number]
+            // if(displayDiv && displayDiv.style){
+            //   displayDiv.style.backgroundColor = 'red'
+            // }else{
+            //   console.log(CodeMirror_code_ChildNode.childNodes)
+            // }
           }
+          // ---------------------
 
+          // ---------------------
           let width = e.srcElement.clientWidth,
             screenX = e.srcElement.offsetLeft,
             screenY = e.srcElement.offsetTop - divScroll.current.scrollTop,
@@ -78,8 +115,18 @@ let LeftView = (props) => {
         }
       }
     }
-  });
-
+    console.log("组件加载");
+    // 组件卸载也会取消副作用
+    return () => {
+      if (!isSyncScroll) {
+        console.log("组件卸载");
+        htmls.current.removeEventListener("mouseover", bindMouseover);
+        htmls.current.removeEventListener("mouseleave", mouseLeave);
+        divScroll.current.removeEventListener("scroll", mouseLeave);
+      }
+    };
+  }, [isViewModeCode]);
+  useEffect(() => {});
   const divBox = (
     <div className="cover-div">
       <span>{line}</span>
@@ -97,7 +144,7 @@ let LeftView = (props) => {
           />
         </div>
       </div>
-      { isViewModeCode ? divBox : null}
+      {isViewModeCode ? divBox : null}
     </>
   );
 };
@@ -116,7 +163,9 @@ const mapStateProps = (state) => {
       top: state.RightDate.top,
     },
     // 获得 Array文字值
-    TextArrays: state.RightDate.textArrays
+    TextArrays: state.RightDate.textArrays,
+
+    RightCodeDivRef: state.RightDate.codeDivRef,
   };
 };
 const mapDispatchProps = (dispatch) => {

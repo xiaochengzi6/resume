@@ -1,11 +1,12 @@
-import {CHANGEMARKDOWNDATA, CHANGESCROLLHEIGHTANDTOP, CHANGEGETTEXTARRAYS} from './constants'
+import {CHANGEMARKDOWNDATA, CHANGESCROLLHEIGHTANDTOP, CHANGEGETTEXTARRAYS, CHANGEGETCODEDIV} from './constants'
 
 const defaultStates = {
   // 这里可以尝试获取初始值 这样也不用去初始化了
   marked: '',
   height: 0,
   top: 0,
-  textArrays: []
+  textArrays: [],
+  codeDivRef: {}
 }
 
 const reducer = (state = defaultStates, action) => {
@@ -25,6 +26,12 @@ const reducer = (state = defaultStates, action) => {
       return {
         ...state,
         textArrays: action.data
+      }
+
+    case CHANGEGETCODEDIV:
+      return{
+        ...state,
+        codeDivRef: action.data
       }
     default:
       return state;

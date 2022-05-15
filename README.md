@@ -20,10 +20,25 @@
 
 
 可视化组件：
-1、先找到目标 html 位置然后开始
+先找到目标 可视化 区域位置然后开始开始绑定事件 `mouseover` 和 `mouseleave` 分别对这两种事件进行处理，获得目标 dom 的 `clientWidth\height` 和 `offsetLeft\right` 然后将 前者设置为盒子的宽度和高度 将后者设置为盒子 `screenY\X` 值就能获得一个动态的显示效果
 
-原始问题：
-致命问题 :
-1.父组件向子组件传递 state 后者是不能去改变的 但不传递数据又会造成数据不共享，每个组件都无法共享数据数据提升可以改变这一问题但是又造成了虎头蛇尾的局面
+同步滚动：
+获得在右侧的页面滚动然后保存在 redux 中 之后再右侧盒子区域通过 ref 获得 dom 元素然后在设置为 右侧滚动左侧也滚动
 
-2.没有利用上 git 操作在重构代码的时候出现问题现在不可以撤回。
+`height: 左侧盒子的高度` 
+
+`top: 左侧盒子距离顶部的距离`
+
+转换公式：
+> `leftBox.scrollTop = top * (leftBoxHeight + 150) / height `
+> 为什么要 +150 因为我的视图距离顶部有 150px 的像素
+
+两者高度的比值和距离顶部的值之积就是左侧盒子要的距离顶部的高度
+
+`top1/leftHeight = top2/rightHeight` 
+
+求解 `top1` = `top2*leftHeight/rightHeight`
+
+![基本页面布局](www.png)
+
+

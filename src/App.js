@@ -1,6 +1,6 @@
 import 'antd/dist/antd.css'
 import './baseUI/base.css'
-import './baseUI/App.css'
+// import './baseUI/App.css'
 
 import { HashRouter } from "react-router-dom";
 import {renderRoutes} from 'react-router-config';
