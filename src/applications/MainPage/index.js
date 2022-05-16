@@ -19,7 +19,7 @@ import '../../utils/pageCss/base.css'
 
 
 let MainPage = (props) => {
-  let { height, isSyncScroll, isViewModeCode} = props;
+  let { height } = props;
   let [isDownPdf, setIsDownPdt] = useState(true);
 
   const handleClick = () => {
@@ -65,8 +65,8 @@ let MainPage = (props) => {
 };
 
 const mapStateProps = (state) => ({
-  height: state.height,
-
+  // height: state.leftView.leftViewHieht
+  height: state.getIn(['leftView', 'leftViewHieht'])
 });
 
 MainPage = connect(mapStateProps)(MainPage);

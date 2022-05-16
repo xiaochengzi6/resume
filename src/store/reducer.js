@@ -1,4 +1,5 @@
-import {combineReducers} from 'redux';
+// import {combineReducers} from 'redux';
+import { combineReducers } from 'redux-immutable';
 import { reducer as MainPageReducers } from '../applications/MainPage/store/index';
 import { reducer as RightWrithReducers } from '../Components/RightWrith/store/index';
 import { reducer as LeftButtonReducers } from '../Components/LeftViewButton/store/index';

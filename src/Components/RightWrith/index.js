@@ -67,7 +67,7 @@ let RightWrith = (props) => {
         options={{
           theme: "github-light" /*指定主题*/,
           mode: "markdown",
-          lineWrapping: true,
+          // lineWrapping: true,
           extraKeys: {},
         }}
         onChange={debounce((editor) => {

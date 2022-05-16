@@ -3,6 +3,7 @@ import MdContainer from 'markdown-it-container';
 import MdHContainer from './markdown-it-rules.js'
 export const markdownParserResume = new MarkdownIt({
     html: true,
+    // linkify: true,
     breaks: true,
 });
 

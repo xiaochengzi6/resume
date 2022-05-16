@@ -15,7 +15,6 @@ let LeftView = (props) => {
     isViewModeCode,
     right_Client,
     TextArrays,
-    RightCodeDivRef,
   } = props;
   const divScroll = useRef(null);
   const htmls = useRef(null);
@@ -33,7 +32,7 @@ let LeftView = (props) => {
   useEffect(() => {
     if (isSyncScroll) {
       /*view盒子的scrollTop会跟随编辑区盒子的scrollTop成比例移动*/
-      const { top, height } = right_Client;
+      const { height } = right_Client;
       let viewBoxHeight =
         divScroll.current.children[0].getBoundingClientRect().height;
       const RightWrithDIV = document.querySelector(".CodeMirror-scroll");
@@ -43,6 +42,7 @@ let LeftView = (props) => {
       let currentTop;
       const onScrollView = () => {
         // 每次滚动的 大小
+        console.log('currentTop',currentTop, height)
         currentTop = Math.round(divScroll.current.scrollTop);
         RightWrithDIV.scrollTop = Math.round(
           currentTop * ((height + 100) / viewBoxHeight)
@@ -55,7 +55,9 @@ let LeftView = (props) => {
       //   top * ((viewBoxHeight + 150) / height)
       // );
       return () => {
-        divScroll.current.removeEventListener("scroll", onScrollView);
+        if(divScroll.current){
+          divScroll.current.removeEventListener("scroll", onScrollView);
+        }
       };
     }
   }, [isSyncScroll]);
@@ -65,15 +67,14 @@ let LeftView = (props) => {
     const coverDiv = document.querySelector(".cover-div");
     // 获取右边编辑页面
     // const CodeMirror_code_ChildNode = document.querySelector(".CodeMirror-code");
-    if (isViewModeCode) {
+    if (isViewModeCode &&  htmls.current) {
       htmls.current.addEventListener("mouseover", bindMouseover);
       htmls.current.addEventListener("mouseleave", mouseLeave);
     }
 
     divScroll.current.addEventListener("scroll", mouseLeave);
-    let displayDiv;
     function mouseLeave() {
-      if (coverDiv) {
+      if (coverDiv && coverDiv.style) {
         coverDiv.style.border = 0;
         coverDiv.style.color = "#fff";
       }
@@ -118,7 +119,7 @@ let LeftView = (props) => {
     console.log("组件加载");
     // 组件卸载也会取消副作用
     return () => {
-      if (!isSyncScroll) {
+      if (!isSyncScroll && htmls.current) {
         console.log("组件卸载");
         htmls.current.removeEventListener("mouseover", bindMouseover);
         htmls.current.removeEventListener("mouseleave", mouseLeave);
@@ -152,20 +153,26 @@ let LeftView = (props) => {
 const mapStateProps = (state) => {
   // 获得改变的 md 值
   return {
-    writh: state.RightDate.marked,
+    // writh: state.RightDate.marked,
+    writh: state.getIn(['RightDate', 'marked']),
     // 同步滚动
-    isSyncScroll: state.LiftButton.isSyncScroll,
+    // isSyncScroll: state.LiftButton.isSyncScroll,
+    isSyncScroll: state.getIn(['LiftButton', 'isSyncScroll']),
     // 可视化
-    isViewModeCode: state.LiftButton.isViewModeCode,
+    // isViewModeCode: state.LiftButton.isViewModeCode,
+    isViewModeCode: state.getIn(['LiftButton', 'isViewModeCode']),
     // 获得编辑区域的高度
     right_Client: {
-      height: state.RightDate.height,
-      top: state.RightDate.top,
+      // height: state.RightDate.height,
+      height: state.getIn(['RightDate', 'height']),
+      // top: state.RightDate.top,
+      // top: state.getIn(['RightDate', 'top']),
     },
     // 获得 Array文字值
-    TextArrays: state.RightDate.textArrays,
+    // TextArrays: state.RightDate.textArrays,
+    TextArrays: state.getIn(['RightDate', 'textArrays']),
 
-    RightCodeDivRef: state.RightDate.codeDivRef,
+    // RightCodeDivRef: state.RightDate.codeDivRef,
   };
 };
 const mapDispatchProps = (dispatch) => {
