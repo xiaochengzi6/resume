@@ -1,8 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import "./stale.css";
 import CodeMirror from "@uiw/react-codemirror";
 // 这里使用了lodsh 有点大到时候看看换一个小的
 import { debounce } from "lodash";
+// context
+import {
+  PageButtonContext,
+  CHANGEPAGEBUTTONMARKED,
+  CHANGEPAGEBUTTONFIRST,
+  CHANGEPAGEBUTTONLAST,
+  CHANGEPAGEBUTTONRESELT,
+  CHANGEPAGEBUTTONDISPATCH,
+} from "./PageButton";
+
 import {
   change_markd,
   change_ScrollHeightTop,
@@ -14,51 +24,55 @@ import basedata from "../../utils/const.js";
 
 let pattern = /-|#* |`*/;
 let tss = /-*/;
-
-// 最初数据 这里可以做出修改保存或者取出浏览器中记录的
 let data = basedata;
-
 // 接收 md 转换为 html
 let RightWrith = (props) => {
   let { changeMD, changeScrollHeight, GetArrayText, GerCodeDivRef } = props;
 
+  // 用于判断页面缓存
+  const { ContextData, dispatch } = useContext(PageButtonContext);
+  const { Pagebutton, marked } = ContextData.toJS();
+
+  if(marked != ''){
+    data = marked
+  }
+
   const codeRef = useRef(null);
-  changeMD(basedata);
+
   useEffect(() => {
-    // 保存 ref
-    GerCodeDivRef(codeRef);
-    setTimeout(() => {
-        console.log("height", codeRef.current.editor.doc.height);
-      let obj = {
-        height: codeRef.current.editor.doc.height,
-        top: 0,
-      };
-      changeScrollHeight(obj);
-    }, 300);
-  }, []);
-  /*获取dom节点*/
-  useEffect(() => {
-    let text = [];
-    setTimeout(() => {
-      if (!codeRef) return;
-      let docs = codeRef.current.editor.doc;
-      for (let i = 0; i < docs.children.length; i++) {
-        /*0-3*/
-        for (let j = 0; j < docs.children[i].lines.length; j++) {
-          /*0-25*/
-          text.push(
-            docs.children[i].lines[j].text
-              .replace(pattern, "")
-              .trim()
-              .replace(tss, "")
-              .trim()
-          );
-        }
+      // 保存 ref
+      if(codeRef){
+        GerCodeDivRef(codeRef);
+        setTimeout(() => {
+          let obj = {
+            height: codeRef.current.editor.doc.height,
+          };
+          changeScrollHeight(obj);
+        });
       }
-      /*这里是用来做可视化的 保存textArray 如果组件更新需要重新保存*/
-      GetArrayText(text);
-    }, 300);
-  });
+  }, []);
+
+  function getRightCodeTextArrs(editor) {
+    let text = [];
+    // if (!codeRef) return;
+    // let docs = codeRef.current.editor.doc;
+    let docs = editor.doc;
+    for (let i = 0; i < docs.children.length; i++) {
+      /*0-3*/
+      for (let j = 0; j < docs.children[i].lines.length; j++) {
+        /*0-25*/
+        text.push(
+          docs.children[i].lines[j].text
+            .replace(pattern, "")
+            .trim()
+            .replace(tss, "")
+            .trim()
+        );
+      }
+    }
+    /*这里是用来做可视化的 保存textArray 如果组件更新需要重新保存*/
+    GetArrayText(text);
+  }
   return (
     <div className="RightWrith--div">
       <CodeMirror
@@ -71,23 +85,22 @@ let RightWrith = (props) => {
           extraKeys: {},
         }}
         onChange={debounce((editor) => {
-          // 这里是每一次改动都要重新获取所有数据 并保存在 数据中
-          changeMD(editor.getValue());
+          let value = editor.getValue()
+            // 这里是每一次改动都要重新获取所有数据 并保存在 数据中
+
+            // todo 这两个换个位置就会产生 BUG　左侧页面不会动态刷新
+            dispatch({type: CHANGEPAGEBUTTONMARKED, data: value})
+            changeMD(value);
+           
+            // 获得文字的修改数组
+            getRightCodeTextArrs(editor);
         }, 300)}
-        // todo 右动 左随动
-        // onScroll={(e) => {
-        //   // 考虑使用 防抖
-        //   // 这里每一次滚动都要获得它距离屏幕上部的位置和距离下边的位置
-        //   let value = {
-        //     top: Math.round(e.getScrollInfo().top),
-        //     height: Math.round(e.getScrollInfo().height),
-        //   };
-        //   changeScrollHeight(value);
-        // }}
+
       ></CodeMirror>
     </div>
   );
 };
+
 
 const mapDispatchProps = (dispatch) => {
   return {
@@ -110,5 +123,5 @@ const mapDispatchProps = (dispatch) => {
     },
   };
 };
-RightWrith = connect(null, mapDispatchProps)(RightWrith);
+RightWrith = connect(null, mapDispatchProps)(React.memo(RightWrith));
 export default RightWrith;

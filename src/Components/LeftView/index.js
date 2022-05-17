@@ -172,7 +172,6 @@ const mapStateProps = (state) => {
     // TextArrays: state.RightDate.textArrays,
     TextArrays: state.getIn(['RightDate', 'textArrays']),
 
-    // RightCodeDivRef: state.RightDate.codeDivRef,
   };
 };
 const mapDispatchProps = (dispatch) => {
@@ -184,5 +183,5 @@ const mapDispatchProps = (dispatch) => {
   };
 };
 
-LeftView = connect(mapStateProps, mapDispatchProps)(LeftView);
+LeftView = connect(mapStateProps, mapDispatchProps)(React.memo(LeftView));
 export default LeftView;

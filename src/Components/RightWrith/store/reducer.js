@@ -27,31 +27,3 @@ const reducer = (state = defaultStates, action) => {
 }
 
 export default reducer
-// const reducer = (state = defaultStates, action) => {
-//   switch(action.type){
-//     case CHANGEMARKDOWNDATA:
-//       return {
-//         ...state,
-//         marked: action.data
-//       }
-//     case CHANGESCROLLHEIGHTANDTOP:
-//       return{
-//         ...state,
-//         height: action.height,
-//         top: action.top
-//       }
-//     case CHANGEGETTEXTARRAYS:
-//       return {
-//         ...state,
-//         textArrays: action.data
-//       }
-
-//     case CHANGEGETCODEDIV:
-//       return{
-//         ...state,
-//         codeDivRef: action.data
-//       }
-//     default:
-//       return state;
-//   }
-// }

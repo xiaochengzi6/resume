@@ -9,7 +9,7 @@ import {
   FilePdfOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
+import React, { useState } from "react";
 
 // 主体
 import SplitPane from "react-split-pane"
@@ -69,7 +69,7 @@ const mapStateProps = (state) => ({
   height: state.getIn(['leftView', 'leftViewHieht'])
 });
 
-MainPage = connect(mapStateProps)(MainPage);
+MainPage = connect(mapStateProps)(React.memo(MainPage));
 export default MainPage;
 
 
