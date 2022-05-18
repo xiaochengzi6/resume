@@ -1,5 +1,8 @@
-let data = null;
-export default data = `
+
+// 很不幸 你发现了这里 你知道的太多了......
+
+// 这就是秋风大佬的简历 我的项目就是照着它做的 https://www.mujicv.com/
+export const data = `
 # 秋风 - 前端工程师
 
 ## 介绍
@@ -100,6 +103,72 @@ Github地址：[https://github.com/hua1995116/webchat](https://github.com/hua199
 
 `
 
+
+export const myResume = `
+# 求职岗位 - 前端
+
+::: left
+XXX/男/NAN
+
+XXXX大学
+
+本科/大一/xxxx年毕业
+
+:::
+
+::: right
+个人博客: xiaochengzi6.github.io
+
+Github https://github.com/xiaochengzi6
+
+邮箱 xxxxxxxx@qq.com
+
+电话 187 xxxx xxxx
+
+:::
+
+## 介绍
+
+- 具备较强的自学能力、适应能力，能接受加班
+- 对技术有激情、有追求，乐于分享并经常写博客
+- 喜欢钻研，热爱编程，有高度的执行力
+- 有良好的设计和编码品味，热爱写代码
+
+## 项目
+
+### React脚手架项目
+
+Github地址: https://github.com/xiaochengzi6/Rx-pack
+
+**技术栈：**\`Webpack\`、 \`Babel\`、 \`React\`
+用于小项目的快速开发
+
+### 文件树形图转路径 - 工具
+**技术栈：**\`Rollup\`、 \`Node\` 
+Github地址: https://github.com/xiaochengzi6/rx-file
+下载: \`yarn add rx-file\`
+主要功能：文件树形图转换成文件路径
+
+用于快速创建、规划项目目录结构，可以使用文件树形图的方式来创建、维护所对应的文件目录
+- 可将含有文件树形图的文件或者字符串转换成文件路径
+- 通过生成的文件路径指定的创建文件
+
+### 网页简历制作项目
+**技术栈：** \`React\`、 \`React-Router\`、 \`React-redux\`、 \`Immutable\` 
+Github地址: https://github.com/xiaochengzi6/resume
+
+- 页面的数据状态使用 immutable 来维护、确保数据的复用率，提高了 React 渲染性能
+- 使用 CodeMirror 编辑器来编写 Markdown-it 来解析语法并其展现到视图
+- 使用 html2canvas 来将 dom 转换成图片，通过 jspdf 来导出
+
+## 技能
+
+- 掌握JavaScript、熟悉ES6语法、对异步编程有一定的研究。
+- 熟悉React+Redux等相关技术栈
+- 从零配置React脚手架环境, 了解常见的Webpack打包方案。
+- 了解TCP、HTTP网络协议。
+- 熟悉Git的基本操作。
+`
 export const useData = `
 
 # 快速入门
@@ -172,4 +241,23 @@ export const useData = `
 文本内容（此时都会在页面靠右位置）
 
 :::
+`
+
+
+export const useResume = `
+# 如何写简历
+1、[如何写「前端简历」，能敲开字节跳动的大门？][https://juejin.cn/post/6921890174842454023]
+
+### 技术组成
+**这里引用了这位作者的部分内容[邵小白][https://juejin.cn/post/7092806181856657445#heading-4]**
+
+- 最重要也是最容易忽视的一个地方，如果把简历当作一场辩论来看（本质上还是说服，说服hr和技术人员来邀请你面试），那么技术组成就可以当作我们的论点，当然并不是其中每一个论点我们都有必要去论证，而简历上的经历，其实就是一个一个的举例论证的过程。证明我们会！证明我们有经验等等，同时技术栈也符合jd上的要求，这样我们就做好了第一步。
+- 一份好的前端技术栈里面，是可以省略掉html、css、git这部分内容的，默许大家都会，但是如果你对于css的一些高级特性，动画特别熟悉的话，也是可以着重点突出的。
+- 如果有阅读源码的经历，除非自己有很大的把握，并且是真的能和面试官说几句，不是看了几个视频或者几篇别人的总结文，就可以写自己有阅读源码的经历的（挖坑），你可以在面试的过程中，展现你的技术深度。这是一位字节在职学姐给我的建议。
+
+
+### 项目经历
+1、[简历中的“项目经验”该怎么写？][https://juejin.cn/post/7020973195305943077]
+
+2、[项目经历准备篇][https://juejin.cn/post/6846687596555272200]
 `

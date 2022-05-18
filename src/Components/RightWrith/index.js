@@ -7,10 +7,6 @@ import { debounce } from "lodash";
 import {
   PageButtonContext,
   CHANGEPAGEBUTTONMARKED,
-  CHANGEPAGEBUTTONFIRST,
-  CHANGEPAGEBUTTONLAST,
-  CHANGEPAGEBUTTONRESELT,
-  CHANGEPAGEBUTTONDISPATCH,
 } from "./PageButton";
 
 import {
@@ -19,24 +15,42 @@ import {
   change_GerTextArrays,
   change_CodeDivRef,
 } from "./store/actionCreate";
+import {changeSetmarkdToUpdata} from '../../applications/MainPage/store/actionCreators.js'
 import { connect } from "react-redux";
-import basedata from "../../utils/const.js";
+import {myResume} from "../../utils/const.js";
 
 let pattern = /-|#* |`*/;
 let tss = /-*/;
-let data = basedata;
+
+
+
+
+let data = myResume;
+if(localStorage.getItem('resume-doc')){
+  // 优先取出本地的
+  data = localStorage.getItem('resume-doc');
+}
+
+
 // 接收 md 转换为 html
 let RightWrith = (props) => {
   let { changeMD, changeScrollHeight, GetArrayText, GerCodeDivRef } = props;
+  let {changeStateMarked, ChangeUnupdateMarked} = props;
 
   // 用于判断页面缓存
   const { ContextData, dispatch } = useContext(PageButtonContext);
-  const { Pagebutton, marked } = ContextData.toJS();
-
-  if(marked != ''){
+  const { marked } = ContextData.toJS();
+  
+  if(marked){
     data = marked
   }
-
+  if(changeStateMarked && !localStorage.getItem('resume-doc') && !marked){
+    data = myResume
+  }
+  useEffect(()=>{
+    console.log('changeStateMarked', changeStateMarked)
+    console.log('组件再这里跟新')
+  }, [changeStateMarked])
   const codeRef = useRef(null);
 
   useEffect(() => {
@@ -52,10 +66,12 @@ let RightWrith = (props) => {
       }
   }, []);
 
+  useEffect(()=>{
+
+  },[])
+
   function getRightCodeTextArrs(editor) {
     let text = [];
-    // if (!codeRef) return;
-    // let docs = codeRef.current.editor.doc;
     let docs = editor.doc;
     for (let i = 0; i < docs.children.length; i++) {
       /*0-3*/
@@ -81,7 +97,8 @@ let RightWrith = (props) => {
         options={{
           theme: "github-light" /*指定主题*/,
           mode: "markdown",
-          // lineWrapping: true,
+          // 自动换行
+          lineWrapping: true,
           extraKeys: {},
         }}
         onChange={debounce((editor) => {
@@ -123,5 +140,11 @@ const mapDispatchProps = (dispatch) => {
     },
   };
 };
-RightWrith = connect(null, mapDispatchProps)(React.memo(RightWrith));
+
+const mapStateProps = (state) =>({
+  // 获得一个数据 用来清除还原操作 当数据改动就会重新载入这个组件 这个感觉应该没啥毛病
+  changeStateMarked: state.getIn(['MainPage', 'updataMarked'])
+})
+
+RightWrith = connect(mapStateProps, mapDispatchProps)(React.memo(RightWrith));
 export default RightWrith;

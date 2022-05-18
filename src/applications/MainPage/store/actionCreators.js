@@ -1,6 +1,6 @@
 import {CHANGEMARKD, CHANGEHEIGHT, CHANGEISDOWNPDF} from './constants.js'
 
-export const changeGetmarkd = (data) =>({
+export const changeSetmarkdToUpdata = (data) =>({
   type: CHANGEMARKD,
   data
 })

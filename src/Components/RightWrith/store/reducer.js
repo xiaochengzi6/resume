@@ -3,6 +3,8 @@ import {fromJS} from 'immutable';
 
 const defaultStates = fromJS({
   // 这里可以尝试获取初始值 这样也不用去初始化了
+  resumeFirst: '',
+  
   marked: '',
   height: 0,
   textArrays: [],

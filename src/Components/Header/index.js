@@ -10,14 +10,15 @@ export default function Home () {
         </div>
         <div className="Header-menu">
           <ul className="Header-menu--ul">
-            <li>
+            {/* 后期增加 */}
+            {/* <li>
               <NavLink to="/moreTemplate">更多模板</NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink to="/useCourse">使用教程</NavLink>
             </li>
             <li>
-              <NavLink to="/writreTxt">如何写xx</NavLink>
+              <NavLink to="/WritePage">如何写简历</NavLink>
             </li>
             <li>关于我</li>
           </ul>
